@@ -155,6 +155,10 @@ main{ min-height: 66vh; }
   color: var(--paper); background: var(--accent);
   padding: 2px 7px 3px;
 }
+.badge--quiet{
+  color: var(--ink-3); background: none;
+  border: 1px solid var(--rule); padding: 1px 6px 2px;
+}
 
 /* media slot — where the gameplay loop goes */
 .slot{
@@ -517,14 +521,20 @@ var PROJECTS = [
   {
     id: "cherry-island",
     name: "Cherry Island",
-    kind: "Online Multiplayer Race",
+    kind: "Multiplayer Prototype",
     org: "Undoco Games",
     period: "Apr 2025 – Jan 2026",
     year: "2025",
     role: "Networking & Level Mechanics",
-    slot: "Race + elimination · 25s",
-    line: "Elimination-style party race. Lobby, matchmaking and server-authoritative level mechanics over Photon Fusion.",
-    sub: "An elimination-style party race game where players run through obstacle-filled levels to reach the finish line first.",
+    tag: "Prototype",
+    thumb: "media/cherry-island-poster.jpg",
+    clips: [
+      ["media/cherry-island-lobby.mp4",     "Lobby · create, join, ready-up, countdown"],
+      ["media/cherry-island-race.mp4",      "Movement · one input path, keyboard and touch"],
+      ["media/cherry-island-obstacles.mp4", "Level mechanics · platforms, slides, push zones"]
+    ],
+    line: "Unreleased prototype for an elimination-style party race. The work was the multiplayer layer, not the presentation.",
+    sub: "An unreleased prototype, not a finished game — the art is stock and the UI is placeholder. What was being proven is that a full obstacle course stays in sync across clients.",
     bullets: [
       "Built the lobby and matchmaking flow — session list, create and join, ready-up, countdown, and handoff into the race scene — including the logic that closes a session to new players once the match starts.",
       "Wrote the <strong>server-side race manager</strong> (ready checks, countdown, first-place detection, round resets) and the respawn system, which falls back from the last checkpoint to the parkour start and then to a fixed spawn point.",
@@ -532,7 +542,7 @@ var PROJECTS = [
       "Set up player movement and camera on Photon Fusion's kinematic character controller, tuning separate gravity and acceleration values for jump feel.",
       "Added mobile support — floating analog stick and touch UI — through the same input path as the keyboard controls."
     ],
-    specs: [["Engine","Unity 2022.3 · C#"],["Networking","Photon Fusion"],["Platform","PC · Mobile"],["Team","7"],["Status","Complete"]]
+    specs: [["Engine","Unity 2022.3 · C#"],["Networking","Photon Fusion"],["Platform","PC · Mobile"],["Team","7"],["Status","Prototype"]]
   },
   {
     id: "underwater",
@@ -666,7 +676,8 @@ var PROJECTS = [
             + '</span></span>')
       + '<p class="tile__name">' + p.name + '</p>'
       + '<p class="tile__meta"><b>' + p.year + '</b> <span>' + p.role + '</span>'
-      +   (p.tag ? ' <span class="badge">' + p.tag + '</span>' : '')
+      +   (p.tag ? ' <span class="badge' + (p.play ? '' : ' badge--quiet') + '">'
+            + p.tag + '</span>' : '')
       + '</p>'
       + '<p class="tile__line">' + p.line + '</p>'
       + '</button>';
