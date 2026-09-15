@@ -179,12 +179,6 @@ main{ min-height: 66vh; }
   font-family: var(--f-mono); font-size: .635rem;
   letter-spacing: .11em; text-transform: uppercase; color: var(--ink-3);
 }
-.slot__play{
-  width: 27px; height: 27px; display: grid; place-items: center;
-  border: 1px solid var(--accent-dim); border-radius: 50%;
-  color: var(--accent); flex: none;
-}
-.slot__play svg{ display: block; margin-left: 2px; }
 
 /* ──────────────────────────  project detail  ────────────────────────── */
 .slot img{
@@ -213,6 +207,20 @@ main{ min-height: 66vh; }
   color: var(--ink-3); line-height: 1.6;
 }
 .slot.has-img.is-center img{ object-position: center; }
+
+/* no capture yet — show the project's own stack rather than an empty frame */
+.slot--card{
+  display: grid; align-content: end;
+  padding: clamp(15px, 2.4vw, 24px);
+  background: linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 80%);
+}
+.slot--card::after{ display: none; }
+.slot__tick{ width: 30px; height: 3px; background: var(--accent-dim); margin-bottom: 13px; }
+.slot__stack{
+  font-family: var(--f-mono); font-size: .66rem;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-3); line-height: 1.9;
+}
 
 /* screenshot gallery — portrait app captures, three across */
 .shots{
@@ -662,7 +670,17 @@ var PROJECTS = [
   var byId     = {};
   PROJECTS.forEach(function(p){ byId[p.id] = p; });
 
-  var PLAY_SVG = '<svg width="8" height="10" viewBox="0 0 9 11" fill="currentColor"><path d="M0 0l9 5.5L0 11z"/></svg>';
+  var CARD_LABELS = ['Engine', 'Networking', 'Architecture', 'Render', 'Platform', 'Model', 'Client', 'Scope'];
+
+  function stackCard(p, extra){
+    var rows = p.specs.filter(function(sp){ return CARD_LABELS.indexOf(sp[0]) > -1; })
+                      .slice(0, 3)
+                      .map(function(sp){ return sp[1]; });
+    return '<span class="slot slot--card' + (extra || '') + '">'
+      + '<span class="slot__tick"></span>'
+      + '<span class="slot__stack">' + rows.join('<br>') + '</span>'
+      + '</span>';
+  }
 
   /* ---- render the Work grid ---- */
   document.getElementById('work-grid').innerHTML = PROJECTS.map(function(p){
@@ -670,10 +688,7 @@ var PROJECTS = [
       + (p.thumb
           ? '<span class="slot has-img' + (p.portrait ? ' is-center' : '')
             + '"><img src="' + p.thumb + '" alt="" loading="lazy"></span>'
-          : '<span class="slot"><span class="slot__mark">'
-            + '<span class="slot__play" aria-hidden="true">' + PLAY_SVG + '</span>'
-            + p.slot
-            + '</span></span>')
+          : stackCard(p))
       + '<p class="tile__name">' + p.name + '</p>'
       + '<p class="tile__meta"><b>' + p.year + '</b> <span>' + p.role + '</span>'
       +   (p.tag ? ' <span class="badge' + (p.play ? '' : ' badge--quiet') + '">'
@@ -701,9 +716,7 @@ var PROJECTS = [
           return '<figure><img src="' + sh[0] + '" alt="' + sh[1] + '" loading="lazy">'
                + '<figcaption>' + sh[1] + '</figcaption></figure>';
         }).join('') + '</div>'
-      : '<span class="slot"><span class="slot__mark">'
-        + '<span class="slot__play" aria-hidden="true">' + PLAY_SVG + '</span>'
-        + p.slot + '</span></span>';
+      : stackCard(p);
     document.getElementById('d-bullets').innerHTML   = p.bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('');
     document.getElementById('d-specs').innerHTML     = p.specs.map(function(s){
       return '<div><dt>' + s[0] + '</dt><dd>' + s[1] + '</dd></div>';
