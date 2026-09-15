@@ -522,6 +522,27 @@ main{ min-height: 66vh; }
    ────────────────────────────────────────────────────────────── */
 var PROJECTS = [
   {
+    id: "eva",
+    name: "Eva",
+    kind: "3D Atmospheric Puzzle-Platformer",
+    org: "Undoco Games",
+    period: "Jun 2025 – Nov 2025",
+    year: "2025",
+    role: "Character, Tools & Puzzles",
+    slot: "Traversal + puzzle · 25s",
+    line: "Atmospheric puzzle-platformer on bezier-spline paths, with a custom scene-view tool for level designers.",
+    sub: "A 3D atmospheric puzzle-platformer with a side-on feel achieved inside a full 3D scene.",
+    bullets: [
+      "Built the player character controller from scratch as a <strong>state machine</strong> (walk, run, crouch, turn, jump, climb, hide), with the animator driven by the same state so movement and animation never disagree.",
+      "Tuned jump feel in detail: coyote time, input buffering before landing, variable jump height, separate rise and fall gravity, and dual-point ground checks to avoid falling off edges by mistake.",
+      "Wrote the <strong>path system</strong> the game runs on — levels laid out as bezier splines with the character following the closest point on the curve.",
+      "Built the matching <strong>Unity editor tool</strong>, letting level designers drag control points, add or remove curve segments, and smooth paths directly in the scene view without touching code.",
+      "Built the checkpoint system, which saves and restores moved objects and enemies so a reload brings the level back exactly as it was.",
+      "Built the interaction and puzzle mechanics — levers, gas valves, pushable crates, two-handed pickups, doors, elevators, moving wagons, ledge climbing — plus patrol and path-following behaviour for the two enemy types."
+    ],
+    specs: [["Engine","Unity 2022.3 · C#"],["Render","URP"],["Platform","PC"],["Team","9"],["Status","Complete"]]
+  },
+  {
     id: "block-knights",
     name: "Block Knights",
     kind: "Mobile Block Puzzle",
@@ -550,31 +571,6 @@ var PROJECTS = [
     specs: [["Engine","Unity 6 · C#"],["Render","URP 2D"],["Platform","iOS · Android"],["Team","9"],["Status","In development"]]
   },
   {
-    id: "cherry-island",
-    name: "Cherry Island",
-    kind: "Multiplayer Prototype",
-    org: "Undoco Games",
-    period: "Apr 2025 – Jan 2026",
-    year: "2025",
-    role: "Networking & Level Mechanics",
-    thumb: "media/cherry-island-poster.jpg",
-    clips: [
-      ["media/cherry-island-lobby.mp4",     "Lobby · create, join, ready-up, countdown"],
-      ["media/cherry-island-race.mp4",      "Movement · one input path, keyboard and touch"],
-      ["media/cherry-island-obstacles.mp4", "Level mechanics · platforms, slides, push zones"]
-    ],
-    line: "Unreleased prototype for an elimination-style party race. The work was the multiplayer layer, not the presentation.",
-    sub: "An unreleased prototype, not a finished game — the art is stock and the UI is placeholder. What was being proven is that a full obstacle course stays in sync across clients.",
-    bullets: [
-      "Built the lobby and matchmaking flow — session list, create and join, ready-up, countdown, and handoff into the race scene — including the logic that closes a session to new players once the match starts.",
-      "Wrote the <strong>server-side race manager</strong> (ready checks, countdown, first-place detection, round resets) and the respawn system, which falls back from the last checkpoint to the parkour start and then to a fixed spawn point.",
-      "Designed the level mechanics — catapults, pendulums, moving and rotating platforms, slides, trampolines, push zones, checkpoints and coin pickups — with server-authoritative knockback over RPC so every client sees the same result.",
-      "Set up player movement and camera on Photon Fusion's kinematic character controller, tuning separate gravity and acceleration values for jump feel.",
-      "Added mobile support — floating analog stick and touch UI — through the same input path as the keyboard controls."
-    ],
-    specs: [["Engine","Unity 2022.3 · C#"],["Networking","Photon Fusion"],["Platform","PC · Mobile"],["Team","7"],["Status","Prototype"]]
-  },
-  {
     id: "underwater",
     name: "Underwater Exploration",
     kind: "Educational Client Prototype",
@@ -598,56 +594,6 @@ var PROJECTS = [
       "Built the tutorial system with per-level step data, and the quiz layer that gives the game its educational core."
     ],
     specs: [["Engine","Unity 6 · C#"],["Architecture","Event bus"],["Platform","iOS · Android"],["Team","11"],["Status","Prototype"]]
-  },
-  {
-    id: "eva",
-    name: "Eva",
-    kind: "3D Atmospheric Puzzle-Platformer",
-    org: "Undoco Games",
-    period: "Jun 2025 – Nov 2025",
-    year: "2025",
-    role: "Character, Tools & Puzzles",
-    slot: "Traversal + puzzle · 25s",
-    line: "Atmospheric puzzle-platformer on bezier-spline paths, with a custom scene-view tool for level designers.",
-    sub: "A 3D atmospheric puzzle-platformer with a side-on feel achieved inside a full 3D scene.",
-    bullets: [
-      "Built the player character controller from scratch as a <strong>state machine</strong> (walk, run, crouch, turn, jump, climb, hide), with the animator driven by the same state so movement and animation never disagree.",
-      "Tuned jump feel in detail: coyote time, input buffering before landing, variable jump height, separate rise and fall gravity, and dual-point ground checks to avoid falling off edges by mistake.",
-      "Wrote the <strong>path system</strong> the game runs on — levels laid out as bezier splines with the character following the closest point on the curve.",
-      "Built the matching <strong>Unity editor tool</strong>, letting level designers drag control points, add or remove curve segments, and smooth paths directly in the scene view without touching code.",
-      "Built the checkpoint system, which saves and restores moved objects and enemies so a reload brings the level back exactly as it was.",
-      "Built the interaction and puzzle mechanics — levers, gas valves, pushable crates, two-handed pickups, doors, elevators, moving wagons, ledge climbing — plus patrol and path-following behaviour for the two enemy types."
-    ],
-    specs: [["Engine","Unity 2022.3 · C#"],["Render","URP"],["Platform","PC"],["Team","9"],["Status","Complete"]]
-  },
-  {
-    id: "space-war",
-    name: "Multiplayer Space War",
-    kind: "Real-Time Online 2D Arena Shooter",
-    org: "Personal project",
-    period: "Personal",
-    year: "Solo",
-    role: "Solo — every line",
-    slot: "Two-client match · 15s",
-    thumb: "media/space-war-match.jpg",
-    shots: [
-      ["media/space-war-lobby.jpg",   "Lobby · create or join a named session"],
-      ["media/space-war-classes.jpg", "Class select · three ships from ScriptableObjects"],
-      ["media/space-war-match.jpg",   "In match · stat points, ammo, live scoreboard"]
-    ],
-    line: "Real-time online arena shooter with a shrinking safe zone. Built alone, playable in the browser.",
-    sub: "A real-time online multiplayer 2D space shooter, built from scratch on my own.",
-    bullets: [
-      "Networked movement, combat and state sync on <strong>Photon PUN2</strong> — RPCs, PhotonView ownership, networked instantiation, and Master Client authority with host migration.",
-      "Designed a data-driven ship and enemy system with ScriptableObjects (three ship classes, three meteor variants), so balance can be changed without touching code.",
-      "Built the core gameplay loop: XP and levelling with spendable stat points, an ammo-and-reload combat system, a shrinking battle-royale safe zone, and collision damage with kill attribution.",
-      "Implemented a live scoreboard synchronised across clients through Photon custom properties, handling mid-match joins, disconnects, and re-sorting in real time.",
-      "Managed development with a feature-branch and pull-request Git workflow across a three-scene architecture (Loading → Lobby → Game)."
-    ],
-    specs: [["Engine","Unity 2021.3 LTS"],["Networking","Photon PUN2"],["Platform","Browser"],["Team","Solo"],["Status","Playable"]],
-    tag: "Playable",
-    play: "https://omefaruk153.itch.io/online-spacewar",
-    playLabel: "Play in browser"
   },
   {
     id: "the-door",
@@ -708,6 +654,60 @@ var PROJECTS = [
       "Built the native Android client in <strong>Kotlin and Jetpack Compose</strong> with CameraX, Retrofit and an MVVM architecture."
     ],
     specs: [["Model","YOLOv8 · ResNet-18"],["Service","Python · FastAPI"],["Client","Kotlin · Compose"],["Team","3"],["Status","Delivered"]]
+  },
+  {
+    id: "cherry-island",
+    name: "Cherry Island",
+    kind: "Multiplayer Prototype",
+    org: "Undoco Games",
+    period: "Apr 2025 – Jan 2026",
+    year: "2025",
+    role: "Networking & Level Mechanics",
+    thumb: "media/cherry-island-poster.jpg",
+    clips: [
+      ["media/cherry-island-lobby.mp4",     "Lobby · create, join, ready-up, countdown"],
+      ["media/cherry-island-race.mp4",      "Movement · one input path, keyboard and touch"],
+      ["media/cherry-island-obstacles.mp4", "Level mechanics · platforms, slides, push zones"]
+    ],
+    line: "Unreleased prototype for an elimination-style party race. The work was the multiplayer layer, not the presentation.",
+    sub: "An unreleased prototype, not a finished game — the art is stock and the UI is placeholder. What was being proven is that a full obstacle course stays in sync across clients.",
+    bullets: [
+      "Built the lobby and matchmaking flow — session list, create and join, ready-up, countdown, and handoff into the race scene — including the logic that closes a session to new players once the match starts.",
+      "Wrote the <strong>server-side race manager</strong> (ready checks, countdown, first-place detection, round resets) and the respawn system, which falls back from the last checkpoint to the parkour start and then to a fixed spawn point.",
+      "Designed the level mechanics — catapults, pendulums, moving and rotating platforms, slides, trampolines, push zones, checkpoints and coin pickups — with server-authoritative knockback over RPC so every client sees the same result.",
+      "Set up player movement and camera on Photon Fusion's kinematic character controller, tuning separate gravity and acceleration values for jump feel.",
+      "Added mobile support — floating analog stick and touch UI — through the same input path as the keyboard controls."
+    ],
+    specs: [["Engine","Unity 2022.3 · C#"],["Networking","Photon Fusion"],["Platform","PC · Mobile"],["Team","7"],["Status","Prototype"]]
+  },
+  {
+    id: "space-war",
+    name: "Multiplayer Space War",
+    kind: "Real-Time Online 2D Arena Shooter",
+    org: "Personal project",
+    period: "Personal",
+    year: "Solo",
+    role: "Solo — every line",
+    slot: "Two-client match · 15s",
+    thumb: "media/space-war-match.jpg",
+    shots: [
+      ["media/space-war-lobby.jpg",   "Lobby · create or join a named session"],
+      ["media/space-war-classes.jpg", "Class select · three ships from ScriptableObjects"],
+      ["media/space-war-match.jpg",   "In match · stat points, ammo, live scoreboard"]
+    ],
+    line: "Real-time online arena shooter with a shrinking safe zone. Built alone, playable in the browser.",
+    sub: "A real-time online multiplayer 2D space shooter, built from scratch on my own.",
+    bullets: [
+      "Networked movement, combat and state sync on <strong>Photon PUN2</strong> — RPCs, PhotonView ownership, networked instantiation, and Master Client authority with host migration.",
+      "Designed a data-driven ship and enemy system with ScriptableObjects (three ship classes, three meteor variants), so balance can be changed without touching code.",
+      "Built the core gameplay loop: XP and levelling with spendable stat points, an ammo-and-reload combat system, a shrinking battle-royale safe zone, and collision damage with kill attribution.",
+      "Implemented a live scoreboard synchronised across clients through Photon custom properties, handling mid-match joins, disconnects, and re-sorting in real time.",
+      "Managed development with a feature-branch and pull-request Git workflow across a three-scene architecture (Loading → Lobby → Game)."
+    ],
+    specs: [["Engine","Unity 2021.3 LTS"],["Networking","Photon PUN2"],["Platform","Browser"],["Team","Solo"],["Status","Playable"]],
+    tag: "Playable",
+    play: "https://omefaruk153.itch.io/online-spacewar",
+    playLabel: "Play in browser"
   }
 ];
 
