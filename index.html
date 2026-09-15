@@ -230,6 +230,26 @@ main{ min-height: 66vh; }
   max-width: 820px;
 }
 .shots--wide{ grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); max-width: 900px; }
+
+/* too many to tile — one row that scrolls sideways, snapping frame to frame */
+.shots--strip{
+  display: flex; grid-template-columns: none;
+  max-width: 100%;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 14px;
+  scrollbar-color: var(--rule) transparent;
+}
+.shots--strip figure{ flex: 0 0 clamp(250px, 40vw, 372px); scroll-snap-align: start; }
+.shots--strip::-webkit-scrollbar{ height: 8px; }
+.shots--strip::-webkit-scrollbar-track{ background: var(--rule-soft); }
+.shots--strip::-webkit-scrollbar-thumb{ background: var(--rule); }
+.shots--strip:hover::-webkit-scrollbar-thumb{ background: var(--accent-dim); }
+.strip-hint{
+  margin: 12px 0 0;
+  font-family: var(--f-mono); font-size: .62rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
 .shots figure{ margin: 0; display: grid; gap: 11px; align-content: start; }
 .shots img{
   display: block; width: 100%; height: auto;
@@ -631,11 +651,18 @@ var PROJECTS = [
     role: "Solo — one week",
     slot: "Room-to-room puzzle · 20s",
     thumb: "media/the-door-hall.jpg",
+    strip: true,
     shots: [
-      ["media/the-door-hall.jpg",   "The hall · the door you're trying to open"],
-      ["media/the-door-code.jpg",   "Directional lock · clue found in another room"],
-      ["media/the-door-chess.jpg",  "Chessboard puzzle"],
-      ["media/the-door-riddle.jpg", "Riddle · typed answer"]
+      ["media/the-door-hall.jpg",    "The hall · the door you're trying to open"],
+      ["media/the-door-room1.jpg",   "Room 1 · rooms are numbered and walked between"],
+      ["media/the-door-room2.jpg",   "Room 2 · bookshelf, chess table, chest"],
+      ["media/the-door-clues.jpg",   "Objects carry clues · a note under the coat rack"],
+      ["media/the-door-examine.jpg", "Examine up close · the painting from the hall"],
+      ["media/the-door-pickup.jpg",  "Pickup · one of the missing parts"],
+      ["media/the-door-code.jpg",    "Directional lock · clue found in another room"],
+      ["media/the-door-symbols.jpg", "Symbol lock · three panels"],
+      ["media/the-door-chess.jpg",   "Chessboard puzzle"],
+      ["media/the-door-riddle.jpg",  "Riddle · typed answer"]
     ],
     line: "Pixel-art escape room built alone in a week for a jam on the theme \"What is Behind the Door?\". Downloadable from itch.io.",
     sub: "A 2D pixel-art escape room built in seven days for a game jam on the theme \"What is Behind the Door?\".",
@@ -736,10 +763,12 @@ var PROJECTS = [
                  + '<figcaption>' + c[1] + '</figcaption></figure>';
           }).join('') + '</div>'
       : p.shots
-      ? '<div class="shots' + (p.portrait ? '' : ' shots--wide') + '">' + p.shots.map(function(sh){
+      ? '<div class="shots' + (p.strip ? ' shots--strip' : (p.portrait ? '' : ' shots--wide'))
+        + '"' + (p.strip ? ' tabindex="0" role="group" aria-label="Screenshots, scroll sideways"' : '') + '>' + p.shots.map(function(sh){
           return '<figure><img src="' + sh[0] + '" alt="' + sh[1] + '" loading="lazy">'
                + '<figcaption>' + sh[1] + '</figcaption></figure>';
         }).join('') + '</div>'
+        + (p.strip ? '<p class="strip-hint">' + p.shots.length + ' screens · scroll sideways &rarr;</p>' : '')
       : stackCard(p);
     document.getElementById('d-bullets').innerHTML   = p.bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('');
     document.getElementById('d-specs').innerHTML     = p.specs.map(function(s){
