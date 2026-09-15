@@ -231,7 +231,7 @@ main{ min-height: 66vh; }
   gap: clamp(16px, 2.2vw, 26px);
   max-width: 820px;
 }
-.shots--wide{ grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); max-width: 900px; }
+.shots--wide{ grid-template-columns: repeat(auto-fit, minmax(278px, 1fr)); max-width: 980px; }
 
 /* too many to tile — one row that scrolls sideways, snapping frame to frame */
 .shots--strip{
@@ -629,6 +629,12 @@ var PROJECTS = [
     year: "Solo",
     role: "Solo — every line",
     slot: "Two-client match · 15s",
+    thumb: "media/space-war-match.jpg",
+    shots: [
+      ["media/space-war-lobby.jpg",   "Lobby · create or join a named session"],
+      ["media/space-war-classes.jpg", "Class select · three ships from ScriptableObjects"],
+      ["media/space-war-match.jpg",   "In match · stat points, ammo, live scoreboard"]
+    ],
     line: "Real-time online arena shooter with a shrinking safe zone. Built alone, playable in the browser.",
     sub: "A real-time online multiplayer 2D space shooter, built from scratch on my own.",
     bullets: [
