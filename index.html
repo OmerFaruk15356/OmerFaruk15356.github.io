@@ -190,18 +190,25 @@ main{ min-height: 66vh; }
 }
 .slot.has-img::after{ display: none; }
 
-/* gameplay clip — the loop that shows the system working */
-.clip{ max-width: 100%; }
-.clip--portrait{ max-width: 330px; }
-.clip video{
+/* gameplay clips — one loop per system, captioned with what it proves */
+.clips{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(198px, 1fr));
+  gap: clamp(16px, 2.2vw, 24px);
+  max-width: 1040px;
+}
+.clips--wide{ grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); max-width: 900px; }
+.clips figure{ margin: 0; display: grid; gap: 11px; align-content: start; }
+.clips video{
   display: block; width: 100%; height: auto;
   border: 1px solid var(--rule); background: var(--paper-2);
 }
-.clip figcaption{
-  margin-top: 11px;
-  font-family: var(--f-mono); font-size: .635rem;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+.clips figcaption{
+  font-family: var(--f-mono); font-size: .625rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3); line-height: 1.6;
 }
+.slot.has-img.is-center img{ object-position: center; }
 
 /* screenshot gallery — portrait app captures, three across */
 .shots{
@@ -488,6 +495,14 @@ var PROJECTS = [
     year: "2026",
     role: "Gameplay & Systems",
     slot: "Gameplay loop · 20s · muted mp4",
+    portrait: true,
+    thumb: "media/block-knights-poster.jpg",
+    clips: [
+      ["media/block-knights-abilities.mp4",  "Ability system · deck refresh"],
+      ["media/block-knights-gamefeel.mp4",   "Game feel · clears, combo, shake"],
+      ["media/block-knights-kingdom.mp4",    "Kingdom meta · stars spent on repairs"],
+      ["media/block-knights-onboarding.mp4", "Onboarding · scripted first session"]
+    ],
     line: "Grid-based block placement and line clearing with a kingdom-building meta layer.",
     sub: "A team block-puzzle title combining grid placement and line clearing with a kingdom-building meta layer.",
     bullets: [
@@ -643,7 +658,8 @@ var PROJECTS = [
   document.getElementById('work-grid').innerHTML = PROJECTS.map(function(p){
     return '<button class="tile" type="button" data-to="' + p.id + '">'
       + (p.thumb
-          ? '<span class="slot has-img"><img src="' + p.thumb + '" alt="" loading="lazy"></span>'
+          ? '<span class="slot has-img' + (p.portrait ? ' is-center' : '')
+            + '"><img src="' + p.thumb + '" alt="" loading="lazy"></span>'
           : '<span class="slot"><span class="slot__mark">'
             + '<span class="slot__play" aria-hidden="true">' + PLAY_SVG + '</span>'
             + p.slot
@@ -662,12 +678,13 @@ var PROJECTS = [
     document.getElementById('d-name').textContent    = p.name;
     document.getElementById('d-role').textContent    = p.role;
     document.getElementById('d-sub').textContent     = p.kind + ' · ' + p.org + '. ' + p.sub;
-    document.getElementById('d-media').innerHTML = p.video
-      ? '<figure class="clip' + (p.portrait ? ' clip--portrait' : '') + '">'
-        + '<video src="' + p.video + '" autoplay muted loop playsinline preload="metadata"'
-        + (p.thumb ? ' poster="' + p.thumb + '"' : '') + '></video>'
-        + (p.clipNote ? '<figcaption>' + p.clipNote + '</figcaption>' : '')
-        + '</figure>'
+    document.getElementById('d-media').innerHTML = p.clips
+      ? '<div class="clips' + (p.portrait ? '' : ' clips--wide') + '">'
+        + p.clips.map(function(c){
+            return '<figure><video src="' + c[0] + '" autoplay muted loop playsinline '
+                 + 'preload="metadata" aria-label="' + c[1] + '"></video>'
+                 + '<figcaption>' + c[1] + '</figcaption></figure>';
+          }).join('') + '</div>'
       : p.shots
       ? '<div class="shots">' + p.shots.map(function(sh){
           return '<figure><img src="' + sh[0] + '" alt="' + sh[1] + '" loading="lazy">'
