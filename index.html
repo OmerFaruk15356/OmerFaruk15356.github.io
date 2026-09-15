@@ -609,31 +609,6 @@ var PROJECTS = [
     playLabel: "Download on itch.io"
   },
   {
-    id: "shelf-anomaly",
-    name: "Shelf Anomaly Detection",
-    kind: "Hybrid Computer Vision System",
-    org: "Computer Engineering capstone",
-    period: "Jan 2026 – Jun 2026",
-    year: "2026",
-    role: "Full stack",
-    slot: "Detection pass on a shelf photo",
-    portrait: true,
-    shots: [
-      ["shots/shelf-1.png", "Capture or pick a shelf photo"],
-      ["shots/shelf-2.png", "171 products · 8 shelf rows · 12 anomalies in 1,233 ms"],
-      ["shots/shelf-3.png", "Per-shelf breakdown"]
-    ],
-    line: "Finds missing, fallen and misplaced products in a single shelf photo. Not a game — the engineering half of the degree.",
-    sub: "A real-time retail shelf auditing system that detects and classifies three types of anomaly — missing, fallen and misplaced products — from a single shelf photo.",
-    bullets: [
-      "Fine-tuned <strong>YOLOv8</strong> on the SKU110K dataset and combined it with DBSCAN shelf-row clustering and ResNet-18 embedding similarity.",
-      "Used Laplacian edge-density validation and adaptive IQR fencing to filter out false positives.",
-      "Delivered the full stack: a <strong>FastAPI</strong> inference service exposing REST endpoints (image upload returning JSON results and an annotated image).",
-      "Built the native Android client in <strong>Kotlin and Jetpack Compose</strong> with CameraX, Retrofit and an MVVM architecture."
-    ],
-    specs: [["Model","YOLOv8 · ResNet-18"],["Service","Python · FastAPI"],["Client","Kotlin · Compose"],["Team","3"],["Status","Delivered"]]
-  },
-  {
     id: "eva",
     name: "Eva",
     kind: "3D Atmospheric Puzzle-Platformer",
@@ -684,6 +659,31 @@ var PROJECTS = [
       "Added mobile support — floating analog stick and touch UI — through the same input path as the keyboard controls."
     ],
     specs: [["Engine","Unity 2022.3 · C#"],["Networking","Photon Fusion"],["Platform","PC · Mobile"],["Team","7"],["Status","Prototype"]]
+  },
+  {
+    id: "shelf-anomaly",
+    name: "Shelf Anomaly Detection",
+    kind: "Hybrid Computer Vision System",
+    org: "Computer Engineering capstone",
+    period: "Jan 2026 – Jun 2026",
+    year: "2026",
+    role: "Full stack",
+    slot: "Detection pass on a shelf photo",
+    portrait: true,
+    shots: [
+      ["shots/shelf-1.png", "Capture or pick a shelf photo"],
+      ["shots/shelf-2.png", "171 products · 8 shelf rows · 12 anomalies in 1,233 ms"],
+      ["shots/shelf-3.png", "Per-shelf breakdown"]
+    ],
+    line: "Finds missing, fallen and misplaced products in a single shelf photo. Not a game — the engineering half of the degree.",
+    sub: "A real-time retail shelf auditing system that detects and classifies three types of anomaly — missing, fallen and misplaced products — from a single shelf photo.",
+    bullets: [
+      "Fine-tuned <strong>YOLOv8</strong> on the SKU110K dataset and combined it with DBSCAN shelf-row clustering and ResNet-18 embedding similarity.",
+      "Used Laplacian edge-density validation and adaptive IQR fencing to filter out false positives.",
+      "Delivered the full stack: a <strong>FastAPI</strong> inference service exposing REST endpoints (image upload returning JSON results and an annotated image).",
+      "Built the native Android client in <strong>Kotlin and Jetpack Compose</strong> with CameraX, Retrofit and an MVVM architecture."
+    ],
+    specs: [["Model","YOLOv8 · ResNet-18"],["Service","Python · FastAPI"],["Client","Kotlin · Compose"],["Team","3"],["Status","Delivered"]]
   },
   {
     id: "space-war",
