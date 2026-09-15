@@ -196,6 +196,7 @@ main{ min-height: 66vh; }
   max-width: 1040px;
 }
 .clips--wide{ grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); max-width: 900px; }
+.clips--large{ grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); max-width: 1160px; }
 .clips figure{ margin: 0; display: grid; gap: 11px; align-content: start; }
 .clips video{
   display: block; width: 100%; height: auto;
@@ -641,6 +642,7 @@ var PROJECTS = [
     year: "2025",
     role: "Character, Tools & Puzzles",
     slot: "Traversal + puzzle · 25s",
+    clipsLarge: true,
     clips: [
       ["media/eva-paths.mp4",   "Movement state machine · tuning exposed in the inspector"],
       ["media/eva-play.mp4",    "Play mode · side-on movement inside a 3D scene"],
@@ -766,7 +768,7 @@ var PROJECTS = [
     document.getElementById('d-role').textContent    = p.role;
     document.getElementById('d-sub').textContent     = p.kind + ' · ' + p.org + '. ' + p.sub;
     document.getElementById('d-media').innerHTML = p.clips
-      ? '<div class="clips' + (p.portrait ? '' : ' clips--wide') + '">'
+      ? '<div class="clips' + (p.portrait ? '' : (p.clipsLarge ? ' clips--large' : ' clips--wide')) + '">'
         + p.clips.map(function(c){
             return '<figure><video src="' + c[0] + '" autoplay muted loop playsinline '
                  + 'preload="metadata" aria-label="' + c[1] + '"></video>'
