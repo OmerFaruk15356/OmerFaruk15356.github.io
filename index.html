@@ -40,6 +40,7 @@
 }
 
 *{ box-sizing: border-box; }
+[hidden]{ display: none !important; }
 
 body{
   background: var(--paper);
@@ -698,7 +699,7 @@ var PROJECTS = [
       else a.removeAttribute('aria-current');
     });
 
-    if (push && location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    if (push && location.hash !== '#' + id) history.pushState({ view: id }, '', '#' + id);
     window.scrollTo(0, 0);
   }
 
@@ -709,7 +710,9 @@ var PROJECTS = [
     show(el.dataset.to, true);
   });
 
-  window.addEventListener('hashchange', function(){ show(location.hash.slice(1), false); });
+  window.addEventListener('popstate', function(){
+    show(location.hash.slice(1) || 'about', false);
+  });
 
   // a looping clip is motion; honour the OS setting and hand over the controls
   if (matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -719,6 +722,8 @@ var PROJECTS = [
     }, true);
   }
 
-  show(location.hash.slice(1) || 'about', false);
+  var first = location.hash.slice(1) || 'about';
+  history.replaceState({ view: first }, '', '#' + first);
+  show(first, false);
 })();
 </script>
