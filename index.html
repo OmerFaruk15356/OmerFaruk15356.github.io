@@ -215,6 +215,8 @@ main{ min-height: 66vh; }
   background: linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 80%);
 }
 .slot--card::after{ display: none; }
+/* in a detail view the card would stretch the full column and tower at 16:9 */
+#d-media .slot--card{ max-width: 430px; }
 .slot__tick{ width: 30px; height: 3px; background: var(--accent-dim); margin-bottom: 13px; }
 .slot__stack{
   font-family: var(--f-mono); font-size: .66rem;
