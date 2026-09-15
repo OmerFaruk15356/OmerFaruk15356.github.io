@@ -522,27 +522,6 @@ main{ min-height: 66vh; }
    ────────────────────────────────────────────────────────────── */
 var PROJECTS = [
   {
-    id: "eva",
-    name: "Eva",
-    kind: "3D Atmospheric Puzzle-Platformer",
-    org: "Undoco Games",
-    period: "Jun 2025 – Nov 2025",
-    year: "2025",
-    role: "Character, Tools & Puzzles",
-    slot: "Traversal + puzzle · 25s",
-    line: "Atmospheric puzzle-platformer on bezier-spline paths, with a custom scene-view tool for level designers.",
-    sub: "A 3D atmospheric puzzle-platformer with a side-on feel achieved inside a full 3D scene.",
-    bullets: [
-      "Built the player character controller from scratch as a <strong>state machine</strong> (walk, run, crouch, turn, jump, climb, hide), with the animator driven by the same state so movement and animation never disagree.",
-      "Tuned jump feel in detail: coyote time, input buffering before landing, variable jump height, separate rise and fall gravity, and dual-point ground checks to avoid falling off edges by mistake.",
-      "Wrote the <strong>path system</strong> the game runs on — levels laid out as bezier splines with the character following the closest point on the curve.",
-      "Built the matching <strong>Unity editor tool</strong>, letting level designers drag control points, add or remove curve segments, and smooth paths directly in the scene view without touching code.",
-      "Built the checkpoint system, which saves and restores moved objects and enemies so a reload brings the level back exactly as it was.",
-      "Built the interaction and puzzle mechanics — levers, gas valves, pushable crates, two-handed pickups, doors, elevators, moving wagons, ledge climbing — plus patrol and path-following behaviour for the two enemy types."
-    ],
-    specs: [["Engine","Unity 2022.3 · C#"],["Render","URP"],["Platform","PC"],["Team","9"],["Status","Complete"]]
-  },
-  {
     id: "block-knights",
     name: "Block Knights",
     kind: "Mobile Block Puzzle",
@@ -654,6 +633,34 @@ var PROJECTS = [
       "Built the native Android client in <strong>Kotlin and Jetpack Compose</strong> with CameraX, Retrofit and an MVVM architecture."
     ],
     specs: [["Model","YOLOv8 · ResNet-18"],["Service","Python · FastAPI"],["Client","Kotlin · Compose"],["Team","3"],["Status","Delivered"]]
+  },
+  {
+    id: "eva",
+    name: "Eva",
+    kind: "3D Atmospheric Puzzle-Platformer",
+    org: "Undoco Games",
+    period: "Jun 2025 – Nov 2025",
+    year: "2025",
+    role: "Character, Tools & Puzzles",
+    slot: "Traversal + puzzle · 25s",
+    thumb: "media/eva-poster.jpg",
+    clips: [
+      ["media/eva-paths.mp4",   "Movement state machine · tuning exposed in the inspector"],
+      ["media/eva-play.mp4",    "Play mode · side-on movement inside a 3D scene"],
+      ["media/eva-scene-a.mp4", "Scene view · the level being built"],
+      ["media/eva-scene-b.mp4", "Scene view · objects selected and positioned"]
+    ],
+    line: "Atmospheric puzzle-platformer on bezier-spline paths, with a custom scene-view tool for level designers.",
+    sub: "A 3D atmospheric puzzle-platformer with a side-on feel achieved inside a full 3D scene.",
+    bullets: [
+      "Built the player character controller from scratch as a <strong>state machine</strong> (walk, run, crouch, turn, jump, climb, hide), with the animator driven by the same state so movement and animation never disagree.",
+      "Tuned jump feel in detail: coyote time, input buffering before landing, variable jump height, separate rise and fall gravity, and dual-point ground checks to avoid falling off edges by mistake.",
+      "Wrote the <strong>path system</strong> the game runs on — levels laid out as bezier splines with the character following the closest point on the curve.",
+      "Built the matching <strong>Unity editor tool</strong>, letting level designers drag control points, add or remove curve segments, and smooth paths directly in the scene view without touching code.",
+      "Built the checkpoint system, which saves and restores moved objects and enemies so a reload brings the level back exactly as it was.",
+      "Built the interaction and puzzle mechanics — levers, gas valves, pushable crates, two-handed pickups, doors, elevators, moving wagons, ledge climbing — plus patrol and path-following behaviour for the two enemy types."
+    ],
+    specs: [["Engine","Unity 2022.3 · C#"],["Render","URP"],["Platform","PC"],["Team","9"],["Status","Complete"]]
   },
   {
     id: "cherry-island",
