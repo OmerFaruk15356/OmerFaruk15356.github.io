@@ -229,6 +229,7 @@ main{ min-height: 66vh; }
   gap: clamp(16px, 2.2vw, 26px);
   max-width: 820px;
 }
+.shots--wide{ grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); max-width: 900px; }
 .shots figure{ margin: 0; display: grid; gap: 11px; align-content: start; }
 .shots img{
   display: block; width: 100%; height: auto;
@@ -629,6 +630,13 @@ var PROJECTS = [
     year: "2024",
     role: "Solo — one week",
     slot: "Room-to-room puzzle · 20s",
+    thumb: "media/the-door-hall.jpg",
+    shots: [
+      ["media/the-door-hall.jpg",   "The hall · the door you're trying to open"],
+      ["media/the-door-code.jpg",   "Directional lock · clue found in another room"],
+      ["media/the-door-chess.jpg",  "Chessboard puzzle"],
+      ["media/the-door-riddle.jpg", "Riddle · typed answer"]
+    ],
     line: "Pixel-art escape room built alone in a week for a jam on the theme \"What is Behind the Door?\". Downloadable from itch.io.",
     sub: "A 2D pixel-art escape room built in seven days for a game jam on the theme \"What is Behind the Door?\".",
     bullets: [
@@ -649,6 +657,7 @@ var PROJECTS = [
     year: "2026",
     role: "Full stack",
     slot: "Detection pass on a shelf photo",
+    portrait: true,
     thumb: "shots/shelf-2.png",
     shots: [
       ["shots/shelf-1.png", "Capture or pick a shelf photo"],
@@ -727,7 +736,7 @@ var PROJECTS = [
                  + '<figcaption>' + c[1] + '</figcaption></figure>';
           }).join('') + '</div>'
       : p.shots
-      ? '<div class="shots">' + p.shots.map(function(sh){
+      ? '<div class="shots' + (p.portrait ? '' : ' shots--wide') + '">' + p.shots.map(function(sh){
           return '<figure><img src="' + sh[0] + '" alt="' + sh[1] + '" loading="lazy">'
                + '<figcaption>' + sh[1] + '</figcaption></figure>';
         }).join('') + '</div>'
