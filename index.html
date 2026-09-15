@@ -534,7 +534,6 @@ var PROJECTS = [
     period: "Apr 2025 – Jan 2026",
     year: "2025",
     role: "Networking & Level Mechanics",
-    tag: "Prototype",
     thumb: "media/cherry-island-poster.jpg",
     clips: [
       ["media/cherry-island-lobby.mp4",     "Lobby · create, join, ready-up, countdown"],
@@ -677,6 +676,18 @@ var PROJECTS = [
 
   var CARD_LABELS = ['Engine', 'Networking', 'Architecture', 'Render', 'Platform', 'Model', 'Client', 'Scope'];
 
+  function statusOf(p){
+    var row = p.specs.filter(function(sp){ return sp[0] === 'Status'; })[0];
+    return row ? row[1] : '';
+  }
+
+  // an action badge where the project can be opened, otherwise its status
+  function badge(p){
+    if (p.play) return ' <span class="badge">' + p.tag + '</span>';
+    var st = statusOf(p);
+    return st ? ' <span class="badge badge--quiet">' + st + '</span>' : '';
+  }
+
   function stackCard(p, extra){
     var rows = p.specs.filter(function(sp){ return CARD_LABELS.indexOf(sp[0]) > -1; })
                       .slice(0, 3)
@@ -696,8 +707,7 @@ var PROJECTS = [
           : stackCard(p))
       + '<p class="tile__name">' + p.name + '</p>'
       + '<p class="tile__meta"><b>' + p.year + '</b> <span>' + p.role + '</span>'
-      +   (p.tag ? ' <span class="badge' + (p.play ? '' : ' badge--quiet') + '">'
-            + p.tag + '</span>' : '')
+      +   badge(p)
       + '</p>'
       + '<p class="tile__line">' + p.line + '</p>'
       + '</button>';
