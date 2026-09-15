@@ -189,6 +189,19 @@ main{ min-height: 66vh; }
 }
 .slot.has-img::after{ display: none; }
 
+/* gameplay clip — the loop that shows the system working */
+.clip{ max-width: 100%; }
+.clip--portrait{ max-width: 330px; }
+.clip video{
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--rule); background: var(--paper-2);
+}
+.clip figcaption{
+  margin-top: 11px;
+  font-family: var(--f-mono); font-size: .635rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+}
+
 /* screenshot gallery — portrait app captures, three across */
 .shots{
   display: grid;
@@ -648,7 +661,13 @@ var PROJECTS = [
     document.getElementById('d-name').textContent    = p.name;
     document.getElementById('d-role').textContent    = p.role;
     document.getElementById('d-sub').textContent     = p.kind + ' · ' + p.org + '. ' + p.sub;
-    document.getElementById('d-media').innerHTML = p.shots
+    document.getElementById('d-media').innerHTML = p.video
+      ? '<figure class="clip' + (p.portrait ? ' clip--portrait' : '') + '">'
+        + '<video src="' + p.video + '" autoplay muted loop playsinline preload="metadata"'
+        + (p.thumb ? ' poster="' + p.thumb + '"' : '') + '></video>'
+        + (p.clipNote ? '<figcaption>' + p.clipNote + '</figcaption>' : '')
+        + '</figure>'
+      : p.shots
       ? '<div class="shots">' + p.shots.map(function(sh){
           return '<figure><img src="' + sh[0] + '" alt="' + sh[1] + '" loading="lazy">'
                + '<figcaption>' + sh[1] + '</figcaption></figure>';
@@ -691,6 +710,14 @@ var PROJECTS = [
   });
 
   window.addEventListener('hashchange', function(){ show(location.hash.slice(1), false); });
+
+  // a looping clip is motion; honour the OS setting and hand over the controls
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.addEventListener('play', function(e){
+      var v = e.target;
+      if (v.tagName === 'VIDEO' && v.autoplay){ v.pause(); v.controls = true; v.autoplay = false; }
+    }, true);
+  }
 
   show(location.hash.slice(1) || 'about', false);
 })();
